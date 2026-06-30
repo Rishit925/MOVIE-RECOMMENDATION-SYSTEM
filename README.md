@@ -15,8 +15,6 @@ The project has been deployed and can be accessed using the link below.
 
 **Application:** [Live Demo](https://movie-recommendation-system-njqu8j3antcxorut93ru2p.streamlit.app/)
 
-> Replace the above URL with the deployed application link (Streamlit, Hugging Face Spaces, Render, Railway, etc.).
-
 
 ## Dataset
 
