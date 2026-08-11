@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+# Prevent Python bytecode and enable immediate logs
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Working directory
+WORKDIR /app
+
+# Install frontend dependencies
+COPY requirements-frontend.txt .
+
+RUN pip install --no-cache-dir -r requirements-frontend.txt
+
+# Copy frontend application
+COPY frontend ./frontend
+
+# Copy movie dataset required by Streamlit
+COPY tmdb_5000_movies.csv .
+
+# Streamlit configuration
+ENV PORT=8501
+
+# Start Streamlit
+CMD ["sh", "-c", "streamlit run frontend/app.py --server.address=0.0.0.0 --server.port=${PORT}"]
