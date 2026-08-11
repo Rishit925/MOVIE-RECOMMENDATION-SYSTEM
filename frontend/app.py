@@ -28,7 +28,7 @@ MOVIES_FILE = BASE_DIR / "tmdb_5000_movies.csv"
 
 API_BASE_URL = os.getenv(
     "API_BASE_URL",
-    "http://127.0.0.1:8000"
+    "https://movie-recommender-backend-h1k5.onrender.com"
 )
 
 
