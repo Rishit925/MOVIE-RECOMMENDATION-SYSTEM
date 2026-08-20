@@ -96,97 +96,6 @@ The project was designed as a complete deployable application rather than only a
 - 👁️ Toggle rating, popularity and recommendation score visibility
 - 📱 Responsive recommendation cards
 
----
-
-# 🧠 How the Recommendation System Works
-
-The recommendation engine follows a **content-based filtering** approach.
-
-## 1️⃣ Select a Movie
-
-The user searches for a movie using the Streamlit interface.
-
-For example:
-
-```text
-Iron Man
-```
-
-The frontend identifies the corresponding movie ID and sends it to the FastAPI backend.
-
----
-
-## 2️⃣ Retrieve Movie Representation
-
-Movie metadata is converted into a textual representation and transformed into numerical vectors using **TF-IDF**.
-
-The trained artifacts are stored in:
-
-```text
-models/
-├── movie_dict.pkl
-├── tfidf.pkl
-└── tfidf_vectors.pkl
-```
-
-This means the deployed application does not need to retrain the recommendation model every time it starts.
-
----
-
-## 3️⃣ Calculate Content Similarity
-
-The selected movie's TF-IDF vector is compared against the vectors of the other movies.
-
-The system uses **cosine similarity** to determine how similar the movies are.
-
-```text
-Selected Movie
-      │
-      ▼
-TF-IDF Vector
-      │
-      ▼
-Cosine Similarity
-      │
-      ▼
-Similar Movies
-```
-
----
-
-## 4️⃣ Hybrid Ranking
-
-The system first identifies content-similar movies and then improves their ranking using ratings and popularity.
-
-The final recommendation score is:
-
-```text
-Final Score =
-    0.75 × Content Similarity
-  + 0.20 × Rating Score
-  + 0.05 × Popularity Score
-```
-
-This gives the recommendation engine a strong focus on **content similarity**, while still considering movie quality and popularity.
-
----
-
-## 5️⃣ Return Recommendations
-
-The backend sorts the movies using the final score and returns the highest-ranked recommendations to the Streamlit frontend.
-
-The frontend displays:
-
-```text
-Movie Poster
-Movie Title
-Rating
-Popularity
-Similarity
-Recommendation Score
-```
-
----
 
 # 🏗️ System Architecture
 
@@ -909,64 +818,6 @@ Streamlit
  └── Recommendation Score
 ```
 
----
-
-# 📈 Why This Project Is More Than a Basic ML Notebook
-
-The project has been structured as a complete deployable application.
-
-### Machine Learning
-
-```text
-Movie Metadata
-      ↓
-Preprocessing
-      ↓
-TF-IDF
-      ↓
-Cosine Similarity
-      ↓
-Hybrid Ranking
-```
-
-### Backend
-
-```text
-FastAPI
-   ↓
-REST API
-   ↓
-Recommendation Service
-   ↓
-TMDB Integration
-```
-
-### Frontend
-
-```text
-Streamlit
-   ↓
-Interactive UI
-   ↓
-API Requests
-   ↓
-Recommendation Cards
-```
-
-### Deployment
-
-```text
-Docker
-   ↓
-Containerized Services
-   ↓
-Render
-   ↓
-Live Application
-```
-
----
-
 # 🚀 Future Improvements
 
 Some possible improvements for future versions include:
@@ -1028,17 +879,12 @@ Interested in:
                     🌐 Live System
 ```
 
----
-
 ## 📜 License
 
 This project is created for educational and portfolio purposes.
 
 ---
 
-<p align="center">
-  ⭐ If you found this project interesting, consider starring the repository!
-</p>
 
 
 
