@@ -856,29 +856,6 @@ Interested in:
 
 ---
 
-# ⭐ Project Highlights
-
-```text
-                    🎬 MOVIE RECOMMENDER
-                           │
-          ┌────────────────┼────────────────┐
-          │                │                │
-          ▼                ▼                ▼
-     🤖 Machine       ⚡ FastAPI       🎨 Streamlit
-      Learning          Backend          Frontend
-          │                │                │
-          └────────────────┼────────────────┘
-                           │
-                           ▼
-                     🐳 Docker
-                           │
-                           ▼
-                     ☁️ Render
-                           │
-                           ▼
-                    🌐 Live System
-```
-
 ## 📜 License
 
 This project is created for educational and portfolio purposes.
