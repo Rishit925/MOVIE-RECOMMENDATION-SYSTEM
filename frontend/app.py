@@ -71,7 +71,7 @@ def get_recommendations(movie_id):
 
     response = requests.get(
         url,
-        timeout=30
+        timeout=120
     )
 
     response.raise_for_status()
