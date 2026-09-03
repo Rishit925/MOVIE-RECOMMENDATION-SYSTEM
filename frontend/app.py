@@ -607,6 +607,10 @@ if page == "🏠 Home":
     118340   # Guardians of the Galaxy
     ]
 
+    # Wake the backend before loading movie posters
+    with st.spinner("Connecting to movie service..."):
+        wake_backend()
+
     poster_columns = st.columns(5)
 
     for column, movie_id in zip(poster_columns, popular_movie_ids):
@@ -614,9 +618,9 @@ if page == "🏠 Home":
         try:
 
             response = requests.get(
-            f"{API_BASE_URL}/tmdb/{movie_id}",
-            timeout=15
-                )
+                f"{API_BASE_URL}/tmdb/{movie_id}",
+                timeout=120
+            )
 
             response.raise_for_status()
 
