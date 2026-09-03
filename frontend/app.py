@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import sys
 import os
+import time
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -65,7 +66,37 @@ MOVIE_ID_COLUMN = (
 # API REQUEST
 # ==========================================================
 
+def wake_backend():
+    """
+    Wake up the Render backend if it is sleeping.
+    Render free services can take some time to start.
+    """
+
+    health_url = f"{API_BASE_URL}/health"
+
+    for attempt in range(3):
+        try:
+            response = requests.get(
+                health_url,
+                timeout=30
+            )
+
+            if response.status_code == 200:
+                return True
+
+        except requests.exceptions.RequestException:
+            pass
+
+        if attempt < 2:
+            time.sleep(2)
+
+    return False
+
+
 def get_recommendations(movie_id):
+
+    # Make sure the backend is awake before requesting recommendations
+    wake_backend()
 
     url = f"{API_BASE_URL}/recommendations/{movie_id}"
 
