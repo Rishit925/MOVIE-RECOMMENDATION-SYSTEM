@@ -30,6 +30,24 @@
 
 ---
 
+# 📌 About the Project
+
+The **Movie Recommendation System** is an end-to-end machine learning application that recommends movies based on the movie selected by the user.
+
+The system uses a **content-based recommendation approach** where movie metadata is transformed into TF-IDF vectors and compared using cosine similarity.
+
+To improve the ranking, the recommendation engine combines:
+
+- 🎯 Content similarity
+- ⭐ Movie ratings
+- 🔥 Movie popularity
+
+Movie posters and additional movie information are retrieved dynamically from the **TMDB API**.
+
+The project was designed as a complete deployable application rather than only a machine learning notebook.
+
+---
+
 ## 🌐 Live Application
 
 ### 🎨 Frontend
@@ -53,26 +71,6 @@ FastAPI automatically provides interactive API documentation at:
 ```text
 https://movie-recommender-backend-h1k5.onrender.com/docs
 ```
-
----
-
-# 📌 About the Project
-
-The **Movie Recommendation System** is an end-to-end machine learning application that recommends movies based on the movie selected by the user.
-
-The system uses a **content-based recommendation approach** where movie metadata is transformed into TF-IDF vectors and compared using cosine similarity.
-
-To improve the ranking, the recommendation engine combines:
-
-- 🎯 Content similarity
-- ⭐ Movie ratings
-- 🔥 Movie popularity
-
-Movie posters and additional movie information are retrieved dynamically from the **TMDB API**.
-
-The project was designed as a complete deployable application rather than only a machine learning notebook.
-
----
 
 # ✨ Key Features
 
@@ -274,45 +272,6 @@ backend/
     └── tmdb.py
 ```
 
-### `main.py`
-
-Initializes the FastAPI application and registers the API routes.
-
-### `routes/`
-
-Contains the API endpoints related to:
-
-- Movie search
-- Movie information
-- Recommendations
-
-### `services/recommender.py`
-
-Contains the core recommendation engine.
-
-It loads the pre-computed ML artifacts and performs:
-
-- Movie search
-- Movie lookup
-- Cosine similarity
-- Hybrid ranking
-- Recommendation generation
-
-### `services/tmdb.py`
-
-Handles communication with the TMDB API.
-
-It includes:
-
-- Authentication
-- HTTP retry strategy
-- Request timeout handling
-- Poster URL generation
-- Backdrop URL generation
-- Response caching
-
----
-
 # 🎨 Frontend
 
 The frontend is built using **Streamlit**.
@@ -389,119 +348,6 @@ TMDB_READ_ACCESS_TOKEN
 ```
 
 The token is not stored in the GitHub repository.
-
----
-
-# 🐳 Dockerization
-
-The project uses separate Dockerfiles for the frontend and backend.
-
-## Backend Dockerfile
-
-```text
-Dockerfile.backend
-```
-
-The backend container contains:
-
-```text
-Python 3.11
-FastAPI
-Uvicorn
-Backend source code
-Pre-trained recommendation models
-```
-
-Build:
-
-```bash
-docker build -f Dockerfile.backend -t movie-recommender-backend .
-```
-
-Run:
-
-```bash
-docker run --rm -p 8000:8000 --env-file .env movie-recommender-backend
-```
-
----
-
-## Frontend Dockerfile
-
-```text
-Dockerfile.frontend
-```
-
-The frontend container contains:
-
-```text
-Python 3.11
-Streamlit
-Frontend source code
-Movie dataset required by the application
-```
-
-Build:
-
-```bash
-docker build -f Dockerfile.frontend -t movie-recommender-frontend .
-```
-
-Run:
-
-```bash
-docker run --rm -p 8501:8501 movie-recommender-frontend
-```
-
----
-
-# ☁️ Deployment
-
-The application is deployed on **Render** using two separate services.
-
-```text
-                    GitHub Repository
-                           │
-             ┌─────────────┴─────────────┐
-             │                           │
-             ▼                           ▼
-     Dockerfile.backend          Dockerfile.frontend
-             │                           │
-             ▼                           ▼
-       Render Backend              Render Frontend
-             │                           │
-             │       HTTP API             │
-             └───────────────◄───────────┘
-```
-
-### Backend
-
-```text
-https://movie-recommender-backend-h1k5.onrender.com
-```
-
-### Frontend
-
-```text
-https://movie-recommender-frontend-zdcp.onrender.com
-```
-
-The frontend uses the deployed backend URL through the `API_BASE_URL` environment variable.
-
----
-
-# 🔐 Environment Variables
-
-For local development, create a `.env` file:
-
-```env
-TMDB_READ_ACCESS_TOKEN=your_tmdb_read_access_token
-API_BASE_URL=http://127.0.0.1:8000
-```
-
-For production, configure the environment variables through Render.
-
-The `.env` file is excluded from Git using `.gitignore`.
 
 ---
 
